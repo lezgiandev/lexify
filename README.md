@@ -1,0 +1,2 @@
+# lexify
+Language learning application
