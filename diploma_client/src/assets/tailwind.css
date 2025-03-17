@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: Nunito;
+    src: url('fonts/Nunito.ttf');
+}
+
+@font-face {
+    font-family: Scumbria;
+    src: url('fonts/Scumbria.otf');
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #171717;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fdba74;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #fb923c;
+}
+
+.router-link-active {
+    @apply text-navbar-colored;
+}
+
+.router-link-exact-active {
+    @apply text-navbar-colored;
+}
