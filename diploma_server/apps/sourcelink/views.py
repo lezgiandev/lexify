@@ -84,3 +84,14 @@ class MarkedSourceViewSet(viewsets.ModelViewSet):
         ).exists()
 
         return Response({"is_marked": is_marked})
+
+    @action(detail=False, methods=['delete'], url_path='delete-all')
+    def delete_all_marks(self, request):
+        try:
+            MarkedSource.objects.filter(user=request.user).delete()
+            return Response(
+                {"detail": "Все отмеченные источники удалены"},
+                status=status.HTTP_204_NO_CONTENT
+            )
+        except MarkedSource.DoesNotExist:
+            return Response({"detail": "Источники не найдены в отмеченном."}, status=status.HTTP_404_NOT_FOUND)

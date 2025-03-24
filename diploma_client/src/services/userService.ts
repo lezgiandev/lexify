@@ -44,3 +44,24 @@ export const updateUserLanguage = async (languageId: number): Promise<void> => {
     throw error;
   }
 };
+
+export const changeUserPassword = async (data: {
+  old_password: string;
+  new_password: string;
+}) => {
+  try {
+    await axios.post(`${API_URL}/change-password/`,
+      {
+        old_password: data.old_password,
+        new_password: data.new_password
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        }
+      });
+  } catch (error) {
+    console.error('Ошибка при смене пароля:', error);
+    throw error;
+  }
+};

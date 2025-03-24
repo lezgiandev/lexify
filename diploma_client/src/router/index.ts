@@ -6,10 +6,11 @@ import { useAuthStore } from '@/stores/authStore';
 import DictionaryView from "@/views/DictionaryView.vue";
 import LibraryView from "@/views/LibraryView.vue";
 import BookView from "@/views/BookView.vue";
-import ProfileView from "@/views/ProfileView.vue";
+import SettingsView from "@/views/SettingsView.vue";
 import SourceView from "@/views/SourceView.vue";
 import AlphabetView from "@/views/AlphabetView.vue";
 import TTSView from "@/views/TTSView.vue";
+import TrainingView from "@/views/TrainingView.vue";
 
 
 const router = createRouter({
@@ -19,9 +20,10 @@ const router = createRouter({
     { path: '/alphabet', component: AlphabetView, meta: { requiresAuth: true } },
     { path: '/tts', component: TTSView, meta: { requiresAuth: true } },
     { path: '/dictionary', component: DictionaryView, meta: { requiresAuth: true } },
+    { path: '/training', component: TrainingView, meta: { requiresAuth: true } },
     { path: '/library', component: LibraryView, meta: { requiresAuth: true } },
     { path: '/sources', component: SourceView, meta: { requiresAuth: true } },
-    { path: '/profile', component: ProfileView, meta: { requiresAuth: true } },
+    { path: '/settings', component: SettingsView, meta: { requiresAuth: true } },
     { path: '/library/:bookId', component: BookView, meta: { requiresAuth: true }, name: 'book' },
     { path: '/login', component: LoginView },
     { path: '/register', component: RegisterView },

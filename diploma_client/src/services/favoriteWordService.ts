@@ -48,3 +48,16 @@ export const removeFromFavorites = async (translationId: number): Promise<void> 
     throw error;
   }
 };
+
+export const deleteAllFavorites = async (): Promise<void> => {
+  try {
+    await axios.delete(`${API_URL}/favorite-words/delete-all/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  } catch (error) {
+    console.error('Ошибка при удалении всех избранных:', error);
+    throw error;
+  }
+};

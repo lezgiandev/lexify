@@ -35,7 +35,7 @@ export default {
         },
       },
       fontFamily: {
-        great: ['Scumbria', 'serif'],
+        great: ['Rhythm', 'serif'],
         main: ['Nunito', 'sans-serif'],
       },
     },

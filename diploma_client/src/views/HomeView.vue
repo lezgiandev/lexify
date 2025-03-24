@@ -7,7 +7,7 @@ import Footer from '@/components/Footer.vue';
   <div class="min-h-screen flex flex-col bg-background-two">
     <NavBar />
     <main class="flex-grow">
-      <div class="relative py-64 bg-background-one overflow-hidden">
+      <div class="relative py-16 bg-background-one overflow-hidden">
         <div class="absolute inset-0 pattern-dots-lg text-button-main/10 opacity-60"></div>
         <div class="container mx-auto px-4 text-center relative">
           <h1 class="mb-8 text-8xl md:text-9xl font-great text-font-colored transform hover:scale-105 transition duration-500">
@@ -16,7 +16,7 @@ import Footer from '@/components/Footer.vue';
           <p class="mb-4 text-2xl font-main text-font-main max-w-2xl mx-auto leading-relaxed">
             Откройте для себя богатство языков коренных народов России через цифровое погружение
           </p>
-          <div class="animate-bounce mt-20">
+          <div class="animate-bounce mt-16">
             <svg class="w-12 h-12 mx-auto text-button-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
             </svg>
@@ -24,7 +24,7 @@ import Footer from '@/components/Footer.vue';
         </div>
       </div>
 
-      <div class="container mx-auto px-4 py-14">
+      <div class="container mx-auto px-4 py-16">
         <h2 class="font-main text-4xl font-bold text-font-main text-center mb-8 relative">
           <span class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-button-main"></span>
           Почему стоит выбрать нас
@@ -45,7 +45,7 @@ import Footer from '@/components/Footer.vue';
               <span class="inline-block bg-button-main/10 text-button-main px-3 py-1 rounded-full text-sm">+1500 документов</span>
             </div>
           </div>
-          
+
           <div class="bg-background-three p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 group relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-button-main/10 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
             <div class="text-button-main mb-6">
@@ -80,7 +80,7 @@ import Footer from '@/components/Footer.vue';
         </div>
       </div>
 
-      <div class="relative py-28 bg-background-one overflow-hidden">
+      <div class="relative py-16 bg-background-one overflow-hidden">
         <div class="absolute inset-0 pattern-dots-lg text-button-main/10 opacity-60"></div>
         <div class="container mx-auto px-4 text-center relative">
           <h1 class="mb-4 text-4xl md:text-6xl font-great text-font-colored transform hover:scale-105 transition duration-500">
@@ -93,7 +93,7 @@ import Footer from '@/components/Footer.vue';
         </div>
       </div>
 
-      <div class="container mx-auto px-4 py-28">
+      <div class="container mx-auto px-4 py-16">
         <div class="max-w-7xl mx-auto">
           <div class="lg:flex gap-12 items-center">
             <div class="lg:w-1/2 mb-12 lg:mb-0">
@@ -134,7 +134,7 @@ import Footer from '@/components/Footer.vue';
         </div>
       </div>
 
-      <div class="relative py-28 bg-background-one overflow-hidden">
+      <div class="relative py-12 bg-background-one overflow-hidden">
         <div class="absolute inset-0 pattern-dots-lg text-button-main/10 opacity-60"></div>
         <div class="container mx-auto px-4">
           <h2 class="text-4xl font-bold text-font-main text-center mb-14 font-main relative">

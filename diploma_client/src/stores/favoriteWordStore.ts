@@ -2,7 +2,7 @@ import {defineStore} from "pinia";
 import {ref} from "vue";
 import type {FavoriteWord} from "@/types/types.ts";
 import {
-  addToFavorites,
+  addToFavorites, deleteAllFavorites,
   getFavoriteWords,
   removeFromFavorites
 } from "@/services/favoriteWordService.ts";
@@ -51,6 +51,19 @@ export const useFavoriteWordStore = defineStore('favoriteWord', () => {
     }
   };
 
+  const removeAllFavorites = async () => {
+    try {
+      isLoading.value = true;
+      await deleteAllFavorites();
+      await fetchFavorites();
+    } catch (err) {
+      error.value = 'Ошибка при удалении всех избранных слов';
+      console.error('Ошибка:', err);
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
   const isFavorite = (translationId: number) => {
     return favorites.value.some((fav) => fav.translation.id === translationId);
   };
@@ -61,6 +74,7 @@ export const useFavoriteWordStore = defineStore('favoriteWord', () => {
     error,
     addFavorite,
     removeFavorite,
+    removeAllFavorites,
     fetchFavorites,
     isFavorite,
   };

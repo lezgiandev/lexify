@@ -51,8 +51,3 @@ class ChangePasswordView(APIView):
             user.save()
             return Response({"status": "Пароль успешно изменен"}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @staticmethod
-    def get(request):
-        serializer = UserLanguageSerializer(request.user)
-        return Response(serializer.data)

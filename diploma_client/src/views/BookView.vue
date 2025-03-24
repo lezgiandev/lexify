@@ -33,20 +33,6 @@ onMounted(async () => {
   <div class="min-h-screen flex flex-col bg-background-one">
     <NavBar />
     <main class="flex-grow container mx-auto px-4 py-8">
-      <!-- Кнопка назад с иконкой -->
-      <button
-        @click="$router.go(-1)"
-        class="mb-8 px-6 py-3 bg-button-main text-button-text rounded-xl font-semibold
-              hover:bg-button-mainhover transition-all duration-300 shadow-lg hover:shadow-xl
-              flex items-center gap-2"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
-        </svg>
-        Назад к библиотеке
-      </button>
-
-      <!-- Заголовок книги -->
       <div class="mb-8 relative">
         <h2 class="text-font-main text-4xl font-bold font-great">
           {{ currentBook?.title }}
@@ -55,23 +41,30 @@ onMounted(async () => {
         <p class="text-font-colored text-lg mt-4 font-main">{{ currentBook?.author }}</p>
       </div>
 
-      <!-- Список предложений -->
-      <div class="space-y-6">
+      <div class="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 font-main">
+        <button
+          @click="$router.go(-1)"
+          class="p-4 bg-button-main text-button-text rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-button-mainhover transition-all duration-300 flex items-center justify-center gap-2"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+          </svg>
+          Назад к библиотеке
+        </button>
+      </div>
+
+      <div class="space-y-4">
         <div
           v-for="sentence in libraryStore.currentBookSentences"
           :key="sentence.id"
-          class="group p-6 bg-background-two rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+          class="group p-4 bg-background-two rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
         >
-          <!-- Основной контент -->
           <div class="flex flex-wrap items-center justify-between gap-4 relative">
-            <!-- Текст предложения -->
             <p class="text-font-main text-lg font-medium flex-1 min-w-[200px] leading-relaxed">
               {{ sentence.text }}
             </p>
 
-            <!-- Кнопки управления -->
             <div class="flex items-center gap-3">
-              <!-- Кнопка перевода -->
               <button
                 @click="toggleTranslate(sentence.id)"
                 class="p-2 rounded-xl bg-button-main/10 text-button-main hover:bg-button-main hover:text-button-text transition-all duration-300"
@@ -92,7 +85,6 @@ onMounted(async () => {
                 </svg>
               </button>
 
-              <!-- Кнопка аудио -->
               <button
                 @click="playAudio(sentence.audio)"
                 class="p-2 rounded-xl bg-button-main/10 text-button-main hover:bg-button-main hover:text-button-text transition-all duration-300"
@@ -114,7 +106,6 @@ onMounted(async () => {
             </div>
           </div>
 
-          <!-- Анимированный перевод -->
           <transition
             enter-active-class="transition-all duration-300 ease-out"
             leave-active-class="transition-all duration-200 ease-in"

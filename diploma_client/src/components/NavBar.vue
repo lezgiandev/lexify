@@ -63,10 +63,10 @@
         >Источники</router-link>
 
         <router-link
-          to="/profile"
+          to="/settings"
           class="text-navbar-text font-main hover:text-navbar-colored text-xl"
           v-if="authStore.isAuthenticated"
-        >Профиль</router-link>
+        >Настройки</router-link>
       </div>
     </div>
 
@@ -122,11 +122,11 @@
         >Источники</router-link>
 
         <router-link
-          to="/profile"
+          to="/settings"
           @click="isMobileMenuOpen = false"
           class="font-main block text-navbar-text text-xl hover:text-navbar-colored"
           v-if="authStore.isAuthenticated"
-        >Профиль</router-link>
+        >Настройки</router-link>
       </div>
     </div>
   </nav>

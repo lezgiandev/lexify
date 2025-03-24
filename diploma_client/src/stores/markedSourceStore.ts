@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import type { MarkedSource } from "@/types/types.ts";
 import {
-  addToMarkedSources,
+  addToMarkedSources, deleteAllMarks,
   getMarkedSources,
   removeFromMarkedSources
 } from "@/services/markedSourceService.ts";
@@ -50,6 +50,19 @@ export const useMarkedSourceStore = defineStore('markedSource', () => {
     }
   };
 
+  const removeAllMarks = async () => {
+    try {
+      isLoading.value = true;
+      await deleteAllMarks();
+      await fetchMarkedSources();
+    } catch (err) {
+      error.value = 'Ошибка при удалении всех отмеченных источников';
+      console.error('Ошибка:', err);
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
   const isMarked = (sourceId: number) => {
     return markedSources.value.some((m) => m.source.id === sourceId);
   };
@@ -59,6 +72,7 @@ export const useMarkedSourceStore = defineStore('markedSource', () => {
     isLoading,
     error,
     addMarkedSource,
+    removeAllMarks,
     removeMarkedSource,
     fetchMarkedSources,
     isMarked,

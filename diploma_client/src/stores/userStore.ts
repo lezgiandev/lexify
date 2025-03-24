@@ -1,4 +1,9 @@
-import { getAllLanguages, getUserLanguage, updateUserLanguage } from "@/services/userService";
+import {
+  changeUserPassword,
+  getAllLanguages,
+  getUserLanguage,
+  updateUserLanguage
+} from "@/services/userService";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import type {Language} from "@/types/types.ts";
@@ -33,10 +38,23 @@ export const useUserStore = defineStore('user', () => {
     }
   };
 
+  const changePassword = async (passwordData: {
+    old_password: string;
+    new_password: string;
+  }) => {
+    try {
+      await changeUserPassword(passwordData);
+    } catch (err) {
+      console.error('Ошибка при смене пароля:', err);
+      throw err;
+    }
+  };
+
   return {
     language,
     languages,
     fetchUserLanguage,
+    changePassword,
     fetchAllLanguages,
     updateLanguage,
   };

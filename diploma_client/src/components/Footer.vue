@@ -17,7 +17,7 @@
             <li><router-link to="/dictionary" class="text-footer-content hover:text-footer-hover transition duration-300 font-main">Словарь</router-link></li>
             <li><router-link to="/library" class="text-footer-content hover:text-footer-hover transition duration-300 font-main">Библиотека</router-link></li>
             <li><router-link to="/sources" class="text-footer-content hover:text-footer-hover transition duration-300 font-main">Источники</router-link></li>
-            <li><router-link to="/profile" class="text-footer-content hover:text-footer-hover transition duration-300 font-main">Профиль</router-link></li>
+            <li><router-link to="/settings" class="text-footer-content hover:text-footer-hover transition duration-300 font-main">Настройки</router-link></li>
           </ul>
         </div>
 

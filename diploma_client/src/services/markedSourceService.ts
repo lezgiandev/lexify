@@ -48,3 +48,16 @@ export const removeFromMarkedSources = async (source_id: number): Promise<void> 
     throw error;
   }
 };
+
+export const deleteAllMarks = async (): Promise<void> => {
+  try {
+    await axios.delete(`${API_URL}/marked-sources/delete-all/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  } catch (error) {
+    console.error('Ошибка при удалении всех отмеченных источников:', error);
+    throw error;
+  }
+};

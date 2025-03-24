@@ -6,11 +6,12 @@ import { storeToRefs } from 'pinia';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
 import CustomAudioPlayer from "@/components/CustomAudioPlayer.vue";
+import EmptyState from "@/components/EmptyState.vue";
 
 const ttsStore = useTtsStore();
 const userStore = useUserStore();
 
-const { isLoading, error, audioUrl, history } = storeToRefs(ttsStore);
+const { isLoading, error, history } = storeToRefs(ttsStore);
 const inputText = ref('');
 
 const generate = async () => {
@@ -41,18 +42,16 @@ onMounted(async () => {
   <div class="min-h-screen flex flex-col bg-background-one">
     <NavBar />
     <main class="flex-grow container mx-auto px-4 py-8">
-      <!-- Заголовок с акцентной линией -->
       <div class="mb-8 relative">
         <h1 class="text-font-main text-3xl font-bold font-great">
           Озвучка текста: {{ userStore.language?.name }}
           <span class="absolute bottom-0 left-0 w-32 h-1 bg-button-main mt-2"></span>
         </h1>
         <p class="text-font-colored text-lg mt-2 font-main">
-          Изменить язык можно в <router-link to="/profile" class="text-button-main hover:underline">профиле</router-link>
+          Изменить язык можно в <router-link to="/settings" class="text-button-main hover:underline">настройках</router-link>
         </p>
       </div>
 
-      <!-- Основной блок ввода -->
       <div class="mb-8 space-y-6">
         <div class="relative group">
           <textarea
@@ -76,14 +75,12 @@ onMounted(async () => {
           </div>
         </div>
 
-        <!-- Состояние загрузки -->
         <div v-if="isLoading" class="flex items-center justify-center gap-4 text-button-main">
           <div class="animate-spin w-8 h-8 border-4 border-button-main border-t-transparent rounded-full"></div>
           <span class="font-main">Идет генерация аудио...</span>
         </div>
       </div>
 
-      <!-- Блок ошибки -->
       <div v-if="error" class="mb-8 p-6 bg-red-100/50 backdrop-blur-sm rounded-2xl border-2 border-red-200 animate-fade-in">
         <div class="flex items-center gap-4 text-red-500">
           <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,7 +90,6 @@ onMounted(async () => {
         </div>
       </div>
 
-      <!-- История запросов -->
       <div v-if="history.length" class="bg-background-two rounded-2xl p-6 shadow-xl">
         <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
           <h2 class="text-font-main text-2xl font-bold font-main">
@@ -122,20 +118,14 @@ onMounted(async () => {
         </div>
       </div>
 
-      <!-- Пустое состояние -->
-      <div v-if="!history.length && !isLoading" class="text-center py-12">
-        <div class="inline-flex flex-col items-center max-w-md mx-auto animate-fade-in">
-          <div class="relative mb-6">
-            <div class="w-32 h-32 bg-button-main/10 rounded-full animate-pulse"></div>
-            <svg class="w-20 h-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-button-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75"/>
-            </svg>
-          </div>
-          <p class="text-font-main text-xl font-medium mb-4">
-            Ваши аудиогенерации появятся здесь
-          </p>
-        </div>
-      </div>
+      <EmptyState v-else>
+        <template #icon>
+          <svg class="w-20 h-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-button-main" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75"/>
+          </svg>
+        </template>
+        Ваши аудиогенерации появятся здесь
+      </EmptyState>
     </main>
     <Footer />
   </div>

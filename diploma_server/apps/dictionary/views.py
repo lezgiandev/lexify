@@ -95,3 +95,14 @@ class FavoriteWordViewSet(viewsets.ModelViewSet):
         ).exists()
 
         return Response({"is_favorite": is_favorite})
+
+    @action(detail=False, methods=['delete'], url_path='delete-all')
+    def delete_all_favorites(self, request):
+        try:
+            FavoriteWord.objects.filter(user=request.user).delete()
+            return Response(
+                {"detail": "Все избранные слова удалены"},
+                status=status.HTTP_204_NO_CONTENT
+            )
+        except FavoriteWord.DoesNotExist:
+            return Response({"detail": "Слова не найдены в избранном."}, status=status.HTTP_404_NOT_FOUND)

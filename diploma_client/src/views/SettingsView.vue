@@ -76,8 +76,8 @@ const handleChangePassword = async () => {
     <main class="flex-grow container mx-auto px-4 py-8 max-w-2xl">
       <div class="mb-8 relative">
         <h1 class="text-font-main text-3xl font-bold font-great">
-          Ваш профиль
-          <span class="absolute bottom-0 left-0 w-48 h-1 bg-button-main mt-2"></span>
+          Настройки
+          <span class="absolute bottom-0 left-0 w-24 h-1 bg-button-main mt-2"></span>
         </h1>
       </div>
 
