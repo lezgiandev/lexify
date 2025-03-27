@@ -99,14 +99,14 @@ watch(() => props.src, () => {
 </script>
 
 <template>
-  <div class="bg-background-three rounded-xl p-4 shadow-xl space-y-2">
+  <div class="bg-zinc-700 rounded-xl p-4 shadow-lg space-y-2 font-bold ">
     <audio ref="audioElement" :src="src" hidden />
 
     <div class="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-2">
-      <p class="text-font-main font-medium line-clamp-2 flex-1 text-base">
+      <p class="text-white font-medium line-clamp-2 flex-1 text-base">
         {{ text }}
       </p>
-      <p class="text-sm text-font-main opacity-75 font-mono">
+      <p class="text-sm text-white opacity-75 font-mono">
         {{ date }}
       </p>
     </div>
@@ -114,7 +114,7 @@ watch(() => props.src, () => {
     <div class="flex items-center gap-4">
       <div
         @click="togglePlay"
-        class="p-2 text-font-main hover:text-button-main cursor-pointer transition-colors"
+        class="p-2 text-violet-500 hover:text-violet-700 cursor-pointer transition-colors"
         title="Воспроизвести/Пауза"
       >
         <svg
@@ -145,19 +145,19 @@ watch(() => props.src, () => {
           @input="handleProgressChange"
           class="w-full h-2 rounded-lg appearance-none cursor-pointer progress-slider"
           :style="{
-            background: `linear-gradient(to right, rgb(253 186 116) ${progress}%, rgb(38 38 38) ${progress}%)`
+            background: `linear-gradient(to right, rgb(139 92 246) ${progress}%, rgb(39 39 42) ${progress}%)`
           }"
         />
       </div>
 
-      <div class="flex gap-2 text-sm text-font-main">
+      <div class="flex gap-2 text-sm text-violet-500">
         <span>{{ formatTime(currentTime) }}</span>
         <span>/</span>
         <span>{{ formatTime(duration) }}</span>
       </div>
 
       <div class="items-center gap-2 sm:flex max-sm:hidden">
-        <svg class="w-5 h-5 text-font-main" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg class="w-5 h-5 text-violet-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75"/>
         </svg>
 
@@ -167,16 +167,16 @@ watch(() => props.src, () => {
           max="100"
           :value="volume * 100"
           @input="handleVolumeChange"
-          class="w-24 h-2 rounded-lg appearance-none cursor-pointer volume-slider"
+          class="w-24 h-1 rounded-lg appearance-none cursor-pointer volume-slider"
           :style="{
-          background: `linear-gradient(to right, rgb(253 186 116) ${volume * 100}%, rgb(38 38 38) ${volume * 100}%)`
+          background: `linear-gradient(to right, rgb(139 92 246) ${volume * 100}%, rgb(39 39 42) ${volume * 100}%)`
         }"
         />
       </div>
 
       <button
         @click="downloadAudio"
-        class="p-2 text-font-main hover:text-button-main transition-colors"
+        class="p-2 text-violet-500 hover:text-violet-700 transition-colors"
         title="Скачать аудио"
       >
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -189,31 +189,31 @@ watch(() => props.src, () => {
 
 <style scoped>
 .progress-slider::-webkit-slider-thumb {
-  @apply w-4 h-4 bg-button-main rounded-full appearance-none transition-all;
+  @apply w-4 h-3 bg-violet-500 rounded-full appearance-none transition-all;
 }
 
 .progress-slider::-moz-range-thumb {
-  @apply w-4 h-4 bg-button-main rounded-full transition-all;
+  @apply w-4 h-3 bg-violet-500 rounded-full transition-all;
 }
 
 .progress-slider::-webkit-slider-thumb:hover {
-  @apply bg-button-mainhover shadow-md;
+  @apply bg-violet-500 shadow-md;
 }
 
 .progress-slider::-moz-range-track {
-  @apply h-2 bg-background-three rounded-lg;
+  @apply h-2 bg-violet-500 rounded-lg;
 }
 
 .volume-slider::-webkit-slider-thumb {
-  @apply w-3 h-3 bg-button-main rounded-full appearance-none transition-all;
+  @apply w-3 h-2 bg-violet-500 rounded-full appearance-none transition-all;
 }
 
 .volume-slider::-moz-range-thumb {
-  @apply w-3 h-3 bg-button-main rounded-full transition-all;
+  @apply w-3 h-2 bg-violet-500 rounded-full transition-all;
 }
 
 .volume-slider::-webkit-slider-thumb:hover {
-  @apply bg-button-mainhover shadow-md;
+  @apply bg-violet-500 shadow-md;
 }
 
 .volume-slider::-moz-range-track {

@@ -24,16 +24,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-background-one">
+  <div class="min-h-screen flex flex-col bg-zinc-900">
     <NavBar />
     <main class="flex-grow container mx-auto px-4 py-8">
       <div class="mb-8 relative">
-        <h1 class="text-font-main text-3xl font-bold font-great">
+        <h1 class="text-white text-3xl font-bold font-main">
           Алфавит: {{ userStore.language?.name }}
-          <span class="absolute bottom-0 left-0 w-48 h-1 bg-button-main mt-2"></span>
+          <span class="absolute bottom-0 left-0 w-48 h-1 bg-violet-500 mt-2"></span>
         </h1>
-        <p class="text-font-colored text-lg mt-2 font-main">
-          Изменить язык можно в <router-link to="/settings" class="text-button-main hover:underline">настройках</router-link>
+        <p class="text-violet-500 text-lg mt-2 font-main">
+          Изменить язык можно в <router-link to="/settings" class="text-violet-500 hover:underline">настройках</router-link>
         </p>
       </div>
 

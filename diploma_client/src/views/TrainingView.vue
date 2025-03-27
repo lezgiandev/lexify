@@ -57,23 +57,23 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-background-one">
+  <div class="min-h-screen flex flex-col bg-zinc-900">
     <NavBar />
     <main class="flex-grow container mx-auto px-4 py-8">
       <div class="mb-8 relative">
-        <h1 class="text-font-main text-3xl font-bold font-great">
+        <h1 class="text-white text-3xl font-bold font-main">
           Режим тренировки языка: {{ userStore.language?.name }}
-          <span class="absolute bottom-0 left-0 w-24 h-1 bg-button-main mt-2"></span>
+          <span class="absolute bottom-0 left-0 w-36 h-1 bg-violet-500 mt-2"></span>
         </h1>
-        <p class="text-font-colored text-lg mt-2 font-main">
-          Изменить язык можно в <router-link to="/profile" class="text-button-main hover:underline">профиле</router-link>
+        <p class="text-violet-500 font-semibold text-lg mt-2 font-main">
+          Изменить язык можно в <router-link to="/settings" class="text-violet-500 hover:underline">настройках</router-link>
         </p>
       </div>
 
       <div class="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 font-main">
         <router-link
           to="/dictionary"
-          class="p-4 bg-button-main text-button-text rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-button-mainhover transition-all duration-300 flex items-center justify-center gap-2"
+          class="p-4 bg-violet-500 text-gray-100 rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-violet-700 transition-all duration-300 flex items-center justify-center gap-2"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -84,7 +84,7 @@ onMounted(async () => {
         <button
           @click="startTraining"
           :disabled="favoriteWordStore.favorites.length === 0"
-          class="p-4 bg-button-main text-button-text rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-button-mainhover transition-all duration-300 flex items-center justify-center gap-2"
+          class="p-4 bg-violet-500 text-gray-100 rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-violet-700 transition-all duration-300 flex items-center justify-center gap-2"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,7 +95,7 @@ onMounted(async () => {
 
         <button
           @click="handleRemoveAll"
-          class="p-4 bg-button-cancel text-button-text rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-button-cancelhover transition-all duration-300 flex items-center justify-center gap-2"
+          class="p-4 bg-button-cancel text-gray-100 rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-button-cancelhover transition-all duration-300 flex items-center justify-center gap-2"
           :disabled="favoriteWordStore.isLoading"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -113,16 +113,16 @@ onMounted(async () => {
         <div
           v-for="favoriteWord in favoriteWordStore.favorites"
           :key="favoriteWord.id"
-          class="p-6 bg-background-two rounded-2xl shadow-lg flex flex-col md:flex-row justify-between items-center"
+          class="p-4 bg-zinc-800 rounded-2xl shadow-lg flex flex-col md:flex-row justify-between items-center"
         >
           <div class="flex flex-grow space-x-4 w-full md:w-auto font-main">
-            <div class="flex-1 p-2 rounded-lg bg-background-three text-font-main text-center truncate font-semibold">
+            <div class="flex-1 p-2 rounded-lg text-xl text-white text-center truncate font-bold">
               {{ favoriteWord.translation.word.text }}
             </div>
-            <div class="text-font-main self-center text-2xl">
+            <div class="text-white self-center text-2xl">
               →
             </div>
-            <div class="flex-1 p-2 rounded-lg bg-background-three text-font-main text-center truncate font-semibold">
+            <div class="flex-1 p-2 rounded-lg text-xl text-white text-center truncate font-bold">
               {{ favoriteWord.translation.text }}
             </div>
           </div>
@@ -130,7 +130,7 @@ onMounted(async () => {
           <div class="flex space-x-4 mt-4 md:mt-0 md:ml-4 font-main">
             <button
               @click="playAudio(favoriteWord.translation.audio)"
-              class="p-2 bg-button-main/20 text-button-main rounded-xl hover:bg-button-main hover:text-button-text transition duration-300"
+              class="p-2 bg-violet-500/20 text-violet-500 rounded-xl hover:bg-violet-500 hover:text-zinc-800 transition duration-300"
             >
               <svg
                 class="w-6 h-6"
@@ -151,7 +151,7 @@ onMounted(async () => {
             <button
               v-if="isFavorite(favoriteWord.translation.id)"
               @click="removeFromFavorites(favoriteWord.translation.id)"
-              class="p-2 rounded-xl transition duration-300 bg-button-cancel/20 text-button-cancel hover:bg-button-cancel hover:text-button-text"
+              class="p-2 rounded-xl transition duration-300 bg-button-cancel/20 text-button-cancel hover:bg-button-cancel hover:text-zinc-800"
             >
               <svg
                 class="w-6 h-6"

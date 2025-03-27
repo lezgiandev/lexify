@@ -3,7 +3,7 @@ import { API_URL } from '@/services/baseURL';
 import type {
   DictionaryCategory,
   DictionaryResponse,
-  PartOfSpeech
+  PartOfSpeech, Translation
 } from '@/types/types.ts';
 
 export const getWords = async (params: {
@@ -15,8 +15,8 @@ export const getWords = async (params: {
   try {
     const response = await axios.get<DictionaryResponse>(`${API_URL}/dictionary/`, {
       params: {
-        word__category: params.category,
-        word__part_of_speech: params.partOfSpeech,
+        category: params.category,
+        part_of_speech: params.partOfSpeech,
         search: params.search,
         page: params.page,
       },
@@ -27,6 +27,25 @@ export const getWords = async (params: {
     return response.data;
   } catch (error) {
     console.error('Ошибка при получении слов:', error);
+    throw error;
+  }
+};
+
+export const getWordTranslations = async (wordId: number, params: {
+  page?: number;
+}): Promise<Translation[]> => {
+  try {
+    const response = await axios.get<Translation[]>(`${API_URL}/dictionary/${wordId}/translations/`, {
+      params: {
+        page: params.page,
+      },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при получении переводов:', error);
     throw error;
   }
 };

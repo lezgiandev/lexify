@@ -2,10 +2,15 @@ from django.db import models
 from apps.language.models import Language
 from apps.user.models import User
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     logo = models.CharField(max_length=1000)
 

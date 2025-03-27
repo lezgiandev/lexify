@@ -20,12 +20,12 @@ const emit = defineEmits<{
   >
     <div class="relative group">
       <ListboxButton
-        class="w-full p-4 bg-background-two text-font-main rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-left pr-12"
+        class="w-full p-4 font-semibold bg-zinc-800 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-left pr-12"
       >
         {{ options.find(o => o.id === modelValue)?.name || defaultLabel }}
         <span class="absolute inset-y-0 right-4 flex items-center">
           <svg
-            class="w-5 h-5 text-button-main transform transition duration-300"
+            class="w-5 h-5 text-violet-500 transform transition duration-300"
             :class="{ 'rotate-180': open }"
             fill="none"
             stroke="currentColor"
@@ -37,7 +37,7 @@ const emit = defineEmits<{
       </ListboxButton>
 
       <ListboxOptions
-        class="absolute z-20 w-full mt-2 bg-background-two rounded-xl shadow-2xl max-h-60 overflow-y-auto"
+        class="absolute z-20 w-full mt-2 bg-zinc-800 rounded-xl shadow-2xl max-h-60 overflow-y-auto"
       >
         <ListboxOption
           :value="null"
@@ -46,8 +46,8 @@ const emit = defineEmits<{
         >
           <li
             :class="[
-              active ? 'bg-background-three text-font-main' : 'bg-background-two text-font-main',
-              'p-3 transition-colors'
+              active ? 'bg-zinc-700 text-white' : 'bg-zinc-800 text-white',
+              'p-3 font-semibold transition-colors'
             ]"
           >
             {{ defaultLabel }}
@@ -63,8 +63,8 @@ const emit = defineEmits<{
         >
           <li
             :class="[
-              active ? 'bg-background-three text-font-main' : 'bg-background-two text-font-main',
-              'p-3 transition-colors'
+              active ? 'bg-zinc-700 text-white' : 'bg-zinc-800 text-white',
+              'p-3 font-semibold transition-colors'
             ]"
           >
             {{ option.name }}

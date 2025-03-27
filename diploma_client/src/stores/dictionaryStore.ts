@@ -3,14 +3,15 @@ import { ref } from 'vue';
 import {
   getCategories,
   getPartsOfSpeech,
-  getWords,
+  getWords, getWordTranslations,
 } from '@/services/dictionaryService';
-import type { DictionaryCategory, PartOfSpeech, Translation } from '@/types/types.ts';
+import type {DictionaryCategory, PartOfSpeech, Translation, Word} from '@/types/types.ts';
 
 export const useDictionaryStore = defineStore('dictionary', () => {
-  const translations = ref<Translation[]>([]);
+  const words = ref<Word[]>([]);
   const categories = ref<DictionaryCategory[]>([]);
   const partsOfSpeech = ref<PartOfSpeech[]>([])
+  const currentWordTranslations = ref<Translation[]>([]);
 
   const isLoading = ref<boolean>(false);
   const error = ref<string | null>(null);
@@ -31,11 +32,26 @@ export const useDictionaryStore = defineStore('dictionary', () => {
         ...params,
         page: currentPage.value,
       });
-      translations.value = response.results;
+      words.value = response.results;
       totalCount.value = response.count;
     } catch (err) {
       error.value = 'Ошибка при загрузке слов';
       console.error('Ошибка при загрузке слов:', err);
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
+  const fetchWordTranslations = async (wordId: number) => {
+    isLoading.value = true;
+    try {
+      currentWordTranslations.value = await getWordTranslations(wordId, {});
+
+      if (!words.value.some(b => b.id === wordId)) {
+        await fetchWords({});
+      }
+    } catch (err) {
+      console.error('Ошибка при загрузке переводов:', err);
     } finally {
       isLoading.value = false;
     }
@@ -58,7 +74,7 @@ export const useDictionaryStore = defineStore('dictionary', () => {
   };
 
   return {
-    translations,
+    words,
     isLoading,
     error,
     currentPage,
@@ -66,6 +82,8 @@ export const useDictionaryStore = defineStore('dictionary', () => {
     totalCount,
     categories,
     partsOfSpeech,
+    currentWordTranslations,
+    fetchWordTranslations,
     fetchWords,
     fetchCategories,
     fetchPartsOfSpeech,

@@ -1,13 +1,20 @@
 from rest_framework import serializers
-from .models import Book, Sentence, CompletedBook
+from .models import Book, Sentence, CompletedBook, Category
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
 
 
 class BookSerializer(serializers.ModelSerializer):
     language = serializers.StringRelatedField()
+    category = CategorySerializer()
 
     class Meta:
         model = Book
-        fields = ('id', 'title', 'author', 'language', 'logo')
+        fields = ('id', 'title', 'author', 'category', 'language', 'logo')
 
 
 class SentenceSerializer(serializers.ModelSerializer):

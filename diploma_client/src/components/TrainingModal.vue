@@ -50,12 +50,10 @@ const playCurrentAudio = () => {
 };
 
 const startNewTest = () => {
-  // Перезапускаем цикл если слова закончились
   if (remainingWords.value.length === 0) {
     remainingWords.value = [...props.words];
   }
 
-  // Выбираем случайное слово из оставшихся
   const randomIndex = Math.floor(Math.random() * remainingWords.value.length);
   currentWordInTest.value = remainingWords.value[randomIndex];
 
@@ -82,7 +80,6 @@ const checkAnswer = () => {
 };
 
 const nextWord = () => {
-  // Удаляем слово при правильном ответе
   if (showResult.value) {
     const isCorrect = userAnswer.value.trim().toLowerCase() === correctAnswer.value.toLowerCase();
     if (isCorrect && currentWordInTest.value) {
@@ -102,20 +99,40 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Остальная часть шаблона без изменений -->
   <div class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-    <div class="bg-background-two rounded-2xl p-8 max-w-2xl w-full shadow-xl">
+    <div class="bg-zinc-800 rounded-2xl p-8 max-w-2xl w-full shadow-xl relative">
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-font-main">Тренировка</h2>
+        <h2 class="text-2xl font-bold text-white">Тренировка</h2>
+
+        <button
+          @click="emit('close')"
+          class="absolute top-7 right-8 rounded-xl p-2 border-red-500 border text-red-500 hover:bg-red-500 hover:text-zinc-800 transition"
+          aria-label="Закрыть"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
       </div>
 
       <div class="mb-6">
-        <p class="text-xl text-font-main mb-4">{{ questionText }}</p>
+        <p class="text-xl text-white font-semibold mb-4">{{ questionText }}</p>
 
         <div v-if="currentTestType === 3" class="mb-4">
           <button
             @click="playCurrentAudio"
-            class="py-2 px-4 bg-button-main text-button-text rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-button-mainhover transition-all duration-300 flex items-center justify-center gap-2"
+            class="py-3 px-6 bg-violet-500 text-slate-100 rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-violet-700 transition-all duration-300 flex items-center justify-center gap-2"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -129,14 +146,14 @@ onMounted(() => {
           v-model="userAnswer"
           :disabled="showResult"
           type="text"
-          class="w-full p-3 rounded-xl bg-background-three text-font-main focus:ring-2 focus:ring-button-main focus:outline-none"
+          class="w-full p-3 rounded-xl bg-zinc-700 font-semibold text-white focus:ring-2 focus:ring-violet-500 focus:outline-none"
           placeholder="Введите ваш ответ..."
         />
       </div>
 
-      <div v-if="showResult" class="mb-6">
+      <div v-if="showResult" class="mb-6 font-semibold bg-zinc-700 rounded-2xl p-4">
         <p
-          class="text-lg font-semibold"
+          class="text-xl font-semibold"
           :class="userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase()
             ? 'text-green-500'
             : 'text-red-500'"
@@ -145,23 +162,16 @@ onMounted(() => {
           ? 'Правильно! 🎉'
           : 'Неверно 😞' }}
         </p>
-        <p class="text-font-main mt-2">
+        <p class="text-white mt-2 text-xl">
           Правильный ответ: <span class="font-bold">{{ correctAnswer }}</span>
         </p>
       </div>
 
       <div class="flex justify-end gap-4">
         <button
-          @click="emit('close')"
-          class="px-6 py-2 bg-button-cancel text-button-text rounded-xl font-bold hover:bg-button-cancelhover transition"
-        >
-          Завершить
-        </button>
-
-        <button
           v-if="!showResult"
           @click="checkAnswer"
-          class="px-6 py-2 bg-button-main text-button-text rounded-xl font-bold hover:bg-button-mainhover transition"
+          class="px-6 py-3 bg-violet-500 text-slate-100 rounded-xl font-bold hover:bg-violet-700 transition"
         >
           Проверить
         </button>
@@ -169,7 +179,7 @@ onMounted(() => {
         <button
           v-else
           @click="nextWord"
-          class="px-6 py-2 bg-button-main text-button-text rounded-xl font-bold hover:bg-button-mainhover transition"
+          class="px-6 py-3 bg-violet-500 text-slate-100 rounded-xl font-bold hover:bg-violet-700 transition"
         >
           Далее
         </button>

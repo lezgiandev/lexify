@@ -8,8 +8,8 @@
 }
 
 @font-face {
-    font-family: Rhythm;
-    src: url('fonts/Rhythm-and-Jazz-Decor.ttf');
+    font-family: DreiFraktur;
+    src: url('fonts/DreiFraktur.ttf');
 }
 
 ::-webkit-scrollbar {
@@ -17,23 +17,23 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: #171717;
+    background: #18181b;
     border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #fdba74;
+    background: #8b5cf6;
     border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #fb923c;
+    background: #6d28d9;
 }
 
 .router-link-active {
-    @apply text-navbar-colored;
+    @apply text-violet-500;
 }
 
 .router-link-exact-active {
-    @apply text-navbar-colored;
+    @apply text-violet-500;
 }

@@ -35,7 +35,7 @@ export default {
         },
       },
       fontFamily: {
-        great: ['Rhythm', 'serif'],
+        great: ['DreiFraktur', 'serif'],
         main: ['Nunito', 'sans-serif'],
       },
     },

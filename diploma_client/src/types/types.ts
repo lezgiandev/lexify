@@ -27,7 +27,6 @@ export interface Language {
   id: number;
   name: string;
   code: string;
-  flag: string;
 }
 
 export interface User {
@@ -48,7 +47,12 @@ export interface DictionaryResponse {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Translation[];
+  results: Word[];
+}
+
+export interface BookCategory {
+  id: number;
+  name: string;
 }
 
 export interface Book {
@@ -56,6 +60,7 @@ export interface Book {
   title: string;
   author: string;
   language: Language;
+  category: BookCategory;
   logo: string;
 }
 

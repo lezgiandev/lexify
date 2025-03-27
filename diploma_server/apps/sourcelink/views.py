@@ -72,19 +72,6 @@ class MarkedSourceViewSet(viewsets.ModelViewSet):
         except MarkedSource.DoesNotExist:
             return Response({"detail": "Ссылка на ресурс не найдена в отмеченном."}, status=status.HTTP_404_NOT_FOUND)
 
-    @action(detail=False, methods=['get'], url_path='check-mark')
-    def check_mark(self, request):
-        source_id = request.query_params.get('source_id')
-        if not source_id:
-            return Response({"detail": "Необходимо указать source_id."}, status=400)
-
-        is_marked = MarkedSource.objects.filter(
-            user=request.user,
-            source_id=source_id
-        ).exists()
-
-        return Response({"is_marked": is_marked})
-
     @action(detail=False, methods=['delete'], url_path='delete-all')
     def delete_all_marks(self, request):
         try:

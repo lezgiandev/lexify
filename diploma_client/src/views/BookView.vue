@@ -30,21 +30,21 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-background-one">
+  <div class="min-h-screen flex flex-col bg-zinc-900">
     <NavBar />
     <main class="flex-grow container mx-auto px-4 py-8">
       <div class="mb-8 relative">
-        <h2 class="text-font-main text-4xl font-bold font-great">
+        <h2 class="text-font-main text-4xl font-bold font-main">
           {{ currentBook?.title }}
-          <span class="absolute bottom-0 left-0 w-48 h-1 bg-button-main mt-2"></span>
+          <span class="absolute bottom-0 left-0 w-48 h-1 bg-violet-500 mt-2"></span>
         </h2>
-        <p class="text-font-colored text-lg mt-4 font-main">{{ currentBook?.author }}</p>
+        <p class="text-violet-500 text-lg mt-4 font-main">{{ currentBook?.author }}</p>
       </div>
 
       <div class="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 font-main">
         <button
           @click="$router.go(-1)"
-          class="p-4 bg-button-main text-button-text rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-button-mainhover transition-all duration-300 flex items-center justify-center gap-2"
+          class="p-4 bg-violet-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-violet-700 transition-all duration-300 flex items-center justify-center gap-2"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
@@ -57,17 +57,17 @@ onMounted(async () => {
         <div
           v-for="sentence in libraryStore.currentBookSentences"
           :key="sentence.id"
-          class="group p-4 bg-background-two rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
+          class="group p-4 bg-zinc-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
         >
           <div class="flex flex-wrap items-center justify-between gap-4 relative">
-            <p class="text-font-main text-lg font-medium flex-1 min-w-[200px] leading-relaxed">
+            <p class="text-white text-lg font-medium flex-1 min-w-[200px] leading-relaxed">
               {{ sentence.text }}
             </p>
 
             <div class="flex items-center gap-3">
               <button
                 @click="toggleTranslate(sentence.id)"
-                class="p-2 rounded-xl bg-button-main/10 text-button-main hover:bg-button-main hover:text-button-text transition-all duration-300"
+                class="p-2 rounded-xl bg-violet-500/20 text-violet-500 hover:bg-violet-500 hover:text-zinc-800 transition-all duration-300"
               >
                 <svg
                   :class="{'rotate-180': showTranslate[sentence.id]}"
@@ -87,7 +87,7 @@ onMounted(async () => {
 
               <button
                 @click="playAudio(sentence.audio)"
-                class="p-2 rounded-xl bg-button-main/10 text-button-main hover:bg-button-main hover:text-button-text transition-all duration-300"
+                class="p-2 rounded-xl bg-violet-500/20 text-violet-500 hover:bg-violet-500 hover:text-zinc-800 transition-all duration-300"
               >
                 <svg
                   class="w-6 h-6"
@@ -116,9 +116,9 @@ onMounted(async () => {
           >
             <div
               v-if="showTranslate[sentence.id]"
-              class="mt-4 pl-4 border-l-4 border-button-main/50 bg-background-three/30 rounded-r-xl p-4"
+              class="mt-4 pl-4 border-l-4 border-violet-500/50 bg-zinc-700/30 rounded-r-xl p-4"
             >
-              <p class="text-font-colored text-base font-medium leading-relaxed whitespace-pre-line">
+              <p class="text-violet-500 text-lg font-medium leading-relaxed whitespace-pre-line">
                 {{ sentence.translate }}
               </p>
             </div>

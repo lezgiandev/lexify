@@ -7,7 +7,7 @@ from django.conf.urls.static import static
 from apps.alphabet.views import LetterListView
 from apps.dictionary.views import DictionaryCategoryViewSet, PartOfSpeechViewSet, DictionaryViewSet, FavoriteWordViewSet
 from apps.language.views import LanguageListView
-from apps.library.views import LibraryViewSet, CompletedBookViewSet
+from apps.library.views import LibraryViewSet, CompletedBookViewSet, BookCategoryViewSet
 from apps.sourcelink.views import SourceViewSet, MarkedSourceViewSet, SourceCategoryViewSet
 from apps.texttospeech.views import GenerateAudioView
 from apps.user.views import RegisterView, LanguageUpdateView, LanguageRetrieveView, ChangePasswordView
@@ -18,6 +18,7 @@ router.register(r'parts-of-speech', PartOfSpeechViewSet, basename='parts-of-spee
 router.register(r'dictionary', DictionaryViewSet, basename='dictionary')
 router.register(r'favorite-words', FavoriteWordViewSet, basename='favorite-words')
 router.register(r'library', LibraryViewSet, basename='library')
+router.register(r'library-categories', BookCategoryViewSet, basename='library-categories')
 router.register(r'completed-books', CompletedBookViewSet, basename='completed-books')
 router.register(r'sources', SourceViewSet, basename='sources')
 router.register(r'marked-sources', MarkedSourceViewSet, basename='marked-sources')

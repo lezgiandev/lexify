@@ -2,10 +2,11 @@ import { defineStore } from "pinia";
 import {ref} from "vue";
 import type { CompletedBook, Sentence } from "@/types/types.ts";
 import {
-  addToCompletedBooks,
+  addToCompletedBooks, deleteAllCompleted,
   getCompletedBooks,
   removeFromCompletedBooks,
 } from "@/services/completedBookService.ts";
+
 
 export const useCompletedBookStore = defineStore('completedBook', () => {
   const completedBooks = ref<CompletedBook[]>([]);
@@ -56,6 +57,19 @@ export const useCompletedBookStore = defineStore('completedBook', () => {
     }
   };
 
+  const removeAllCompleted = async () => {
+    try {
+      isLoading.value = true;
+      await deleteAllCompleted();
+      await fetchCompleted();
+    } catch (err) {
+      error.value = 'Ошибка при удалении всех прочитанных книг';
+      console.error('Ошибка:', err);
+    } finally {
+      isLoading.value = false;
+    }
+  };
+
   const isCompleted = (bookId: number) => {
     return completedBooks.value.some(cb => cb.book.id === bookId);
   };
@@ -65,6 +79,7 @@ export const useCompletedBookStore = defineStore('completedBook', () => {
     currentBookSentences,
     isLoading,
     error,
+    removeAllCompleted,
     fetchCompleted,
     addCompleted,
     removeCompleted,

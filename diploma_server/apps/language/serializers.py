@@ -5,4 +5,4 @@ from apps.language.models import Language
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
-        fields = ('id', 'name', 'code', 'flag')
+        fields = ('id', 'name', 'code')

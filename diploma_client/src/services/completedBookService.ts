@@ -48,3 +48,16 @@ export const removeFromCompletedBooks = async (bookId: number): Promise<void> =>
     throw error;
   }
 };
+
+export const deleteAllCompleted = async (): Promise<void> => {
+  try {
+    await axios.delete(`${API_URL}/completed-books/delete-all/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+  } catch (error) {
+    console.error('Ошибка при удалении всех прочитанных книг:', error);
+    throw error;
+  }
+};

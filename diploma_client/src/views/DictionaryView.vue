@@ -3,7 +3,6 @@ import { ref, computed, onMounted } from 'vue';
 import { useDictionaryStore } from '@/stores/dictionaryStore';
 import NavBar from '@/components/NavBar.vue';
 import Footer from '@/components/Footer.vue';
-import { useUserStore } from "@/stores/userStore.ts";
 import { useFavoriteWordStore } from "@/stores/favoriteWordStore.ts";
 import CustomListbox from "@/components/CustomListbox.vue";
 import PaginationControls from "@/components/PaginationControls.vue";
@@ -11,6 +10,7 @@ import EmptyState from "@/components/EmptyState.vue";
 import WordCard from "@/components/WordCard.vue";
 import TrainingButton from "@/components/TrainingButton.vue";
 import SearchInput from "@/components/SearchInput.vue";
+import { useUserStore } from "@/stores/userStore.ts";
 
 const favoriteWordStore = useFavoriteWordStore();
 const dictionaryStore = useDictionaryStore();
@@ -39,7 +39,7 @@ let searchTimeout: number | null = null;
 const handleSearch = () => {
   if (searchTimeout) clearTimeout(searchTimeout);
   searchTimeout = setTimeout(() => {
-    dictionaryStore.currentPage = 1; // Сброс страницы
+    dictionaryStore.currentPage = 1;
     fetchWords();
   }, 300);
 };
@@ -56,25 +56,6 @@ const prevPage = () => {
   }
 };
 
-const playAudio = (audioUrl: string) => {
-  if (audioUrl) {
-    const audio = new Audio(audioUrl);
-    audio.play();
-  }
-};
-
-const addToFavorites = async (translationId: number) => {
-  await favoriteWordStore.addFavorite(translationId);
-};
-
-const removeFromFavorites = async (translationId: number) => {
-  await favoriteWordStore.removeFavorite(translationId);
-};
-
-const isFavorite = (translationId: number) => {
-  return favoriteWordStore.isFavorite(translationId);
-};
-
 onMounted(async () => {
   await userStore.fetchUserLanguage();
   await dictionaryStore.fetchWords({});
@@ -85,20 +66,20 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-background-one">
+  <div class="min-h-screen flex flex-col bg-zinc-900">
     <NavBar />
     <main class="flex-grow container mx-auto px-4 py-8">
       <div class="mb-8 relative">
-        <h1 class="text-font-main text-3xl font-bold font-great">
-          Словарь: {{ userStore.language?.name }}
-          <span class="absolute bottom-0 left-0 w-24 h-1 bg-button-main mt-2"></span>
+        <h1 class="text-slate-100 text-3xl font-bold font-main">
+          Словарь для языка: {{ userStore.language?.name }}
+          <span class="absolute bottom-0 left-0 w-24 h-1 bg-violet-500 mt-2"></span>
         </h1>
-        <p class="text-font-colored text-lg mt-2 font-main">
-          Изменить язык можно в <router-link to="/settings" class="text-button-main hover:underline">настройках</router-link>
+        <p class="text-violet-500 text-lg mt-2 font-main font-semibold">
+          Изменить язык можно в <router-link to="/settings" class="text-violet-500 hover:underline">настройках</router-link>
         </p>
       </div>
 
-      <div class="mb-8 grid grid-cols-1 md:grid-cols-4 gap-4 font-main">
+      <div class="mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 font-main">
         <SearchInput
           v-model="searchQuery"
           @update:modelValue="handleSearch"
@@ -121,23 +102,17 @@ onMounted(async () => {
         <TrainingButton />
       </div>
 
-      <div v-if="dictionaryStore.translations.length > 0" class="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-2 gap-4">
+      <div v-if="dictionaryStore.words.length > 0" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
         <WordCard
-          v-for="translation in dictionaryStore.translations"
-          :key="translation.id"
-          :word="translation.word.text"
-          :translation="translation.text"
-          :audioUrl="translation.audio"
-          :isFavorite="isFavorite(translation.id)"
-          :translationId="translation.id"
-          @play-audio="playAudio"
-          @add-to-favorite="addToFavorites"
-          @remove-from-favorite="removeFromFavorites"
+          v-for="word in dictionaryStore.words"
+          :key="word.id"
+          :word="word.text"
+          :wordId="word.id"
         />
       </div>
 
       <EmptyState v-else>
-        Словарь для выбранного языка пока недоступен
+        Ничего не обнаружено
       </EmptyState>
 
       <PaginationControls

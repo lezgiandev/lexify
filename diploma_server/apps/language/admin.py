@@ -3,5 +3,5 @@ from .models import Language
 
 @admin.register(Language)
 class LanguageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'flag')
+    list_display = ('id', 'name', 'code')
     search_fields = ('name',)
