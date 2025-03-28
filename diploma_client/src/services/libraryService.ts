@@ -46,6 +46,7 @@ export const getBookSentences = async (bookId: number, params: {
   }
 };
 
+
 export const getCategories = async (): Promise<BookCategory[]> => {
   try {
     const response = await axios.get<BookCategory[]>(`${API_URL}/library-categories/`, {

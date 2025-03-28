@@ -45,7 +45,7 @@ class DictionaryViewSet(viewsets.ReadOnlyModelViewSet):
         return Word.objects.none()
 
     @action(detail=True, methods=['get'], url_path='translations')
-    def list_translations(self, request):
+    def list_translations(self, request, pk=None):
         try:
             word = self.get_object()
             translations = Translation.objects.filter(

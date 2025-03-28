@@ -34,7 +34,7 @@ class LibraryViewSet(viewsets.ReadOnlyModelViewSet):
         return Book.objects.none()
 
     @action(detail=True, methods=['get'], url_path='sentences')
-    def list_sentences(self, request):
+    def list_sentences(self, request, pk=None):
         book = self.get_object()
         sentences = Sentence.objects.filter(book=book)
         serializer = SentenceSerializer(sentences, many=True)
