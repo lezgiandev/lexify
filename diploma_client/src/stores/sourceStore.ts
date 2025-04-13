@@ -3,7 +3,7 @@ import {ref} from "vue";
 import type {
   Source,
   SourceCategory,
-} from "@/types/types.ts";
+} from "@/types";
 import { getCategories, getSources } from "@/services/sourceService.ts";
 
 export const useSourceStore = defineStore('source', () => {

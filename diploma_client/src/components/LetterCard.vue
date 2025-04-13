@@ -9,14 +9,14 @@ const emit = defineEmits(['play-audio'])
 </script>
 
 <template>
-  <div class="group relative p-6 bg-zinc-800 rounded-2xl shadow-xl transition-all duration-300 flex flex-col items-center justify-center aspect-square overflow-hidden">
-    <span class="text-4xl md:text-5xl font-bold text-white mb-2 transition-transform">
+  <div class="group relative p-6 bg-darktwo rounded-2xl shadow-xl transition-all duration-300 flex flex-col items-center justify-center aspect-square overflow-hidden">
+    <span class="text-4xl md:text-5xl font-bold text-light mb-2 transition-transform">
       {{ letter }}
     </span>
 
     <button
       @click="emit('play-audio', audioUrl)"
-      class="p-2 bg-violet-500/20 text-violet-500 rounded-xl shadow-lg hover:shadow-xl hover:bg-violet-500 hover:text-button-text transition-all duration-300"
+      class="p-2 bg-goldlight/20 text-goldlight rounded-xl shadow-lg hover:shadow-xl hover:bg-goldlight hover:text-darktwo transition-all duration-300"
     >
       <svg
         class="w-6 h-6"

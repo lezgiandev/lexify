@@ -101,16 +101,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-zinc-900">
+  <div class="min-h-screen flex flex-col bg-darkone">
     <NavBar />
     <main class="flex-grow container mx-auto px-4 py-8">
       <div class="mb-8 relative">
-        <h1 class="text-white text-3xl font-bold font-main">
+        <h1 class="text-light text-3xl font-bold font-main">
           Источники: {{ userStore.language?.name }}
-          <span class="absolute bottom-0 left-0 w-48 h-1 bg-violet-500"></span>
+          <span class="absolute bottom-0 left-0 w-48 h-1 bg-goldlight"></span>
         </h1>
-        <p class="text-violet-500 text-lg mt-2 font-main">
-          Изменить язык можно в <router-link to="/settings" class="text-violet-500 hover:underline">настройках</router-link>
+        <p class="text-goldlight text-lg mt-2 font-main">
+          Изменить язык можно в <router-link to="/settings" class="text-goldlight hover:underline">настройках</router-link>
         </p>
       </div>
 
@@ -129,7 +129,7 @@ onMounted(async () => {
 
         <button
           @click="toggleShowOnlyMarked"
-          class="p-4 bg-violet-500 text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-violet-700 transition-all duration-300 flex items-center justify-center gap-2"
+          class="p-4 bg-goldlight text-darkone rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-golddark transition-all duration-300 flex items-center justify-center gap-2"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
@@ -139,7 +139,7 @@ onMounted(async () => {
 
         <button
           @click="handleRemoveAll"
-          class="p-4 bg-button-cancel text-white rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-button-cancelhover transition-all duration-300 flex items-center justify-center gap-2"
+          class="p-4 bg-redlight text-darkone rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-reddark transition-all duration-300 flex items-center justify-center gap-2"
           :disabled="markedSourceStore.isLoading"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

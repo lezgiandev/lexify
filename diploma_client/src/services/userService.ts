@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_URL } from "@/services/baseURL.ts";
-import type { Language } from "@/types/types.ts";
+import type { Language } from "@/types";
 
 
 export const getUserLanguage = async (): Promise<Language> => {

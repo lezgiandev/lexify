@@ -5,7 +5,7 @@ import {
   getPartsOfSpeech,
   getWords, getWordTranslations,
 } from '@/services/dictionaryService';
-import type {DictionaryCategory, PartOfSpeech, Translation, Word} from '@/types/types.ts';
+import type {DictionaryCategory, PartOfSpeech, Translation, Word} from '@/types';
 
 export const useDictionaryStore = defineStore('dictionary', () => {
   const words = ref<Word[]>([]);

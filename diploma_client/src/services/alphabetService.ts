@@ -1,4 +1,4 @@
-import type { Letter } from "@/types/types.ts";
+import type { Letter } from "@/types";
 import axios from "axios";
 import { API_URL } from "@/services/baseURL.ts";
 

@@ -8,8 +8,8 @@
 }
 
 @font-face {
-    font-family: DreiFraktur;
-    src: url('fonts/DreiFraktur.ttf');
+    font-family: FleurDeLeah;
+    src: url('fonts/FleurDeLeah-Regular.ttf');
 }
 
 ::-webkit-scrollbar {
@@ -17,23 +17,23 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: #18181b;
+    background: #292524;
     border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #8b5cf6;
+    background: #fdba74;
     border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #6d28d9;
+    background: #fdba74;
 }
 
 .router-link-active {
-    @apply text-violet-500;
+    @apply text-orange-300;
 }
 
 .router-link-exact-active {
-    @apply text-violet-500;
+    @apply text-orange-300;
 }

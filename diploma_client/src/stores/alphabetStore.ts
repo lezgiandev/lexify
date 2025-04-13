@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type { Letter } from "@/types/types.ts";
+import type { Letter } from "@/types";
 import {getLetters} from "@/services/alphabetService.ts";
 
 export const useAlphabetStore = defineStore('alphabet', () => {

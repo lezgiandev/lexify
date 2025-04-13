@@ -2,9 +2,9 @@
   <div class="text-center py-12">
     <div class="inline-flex flex-col items-center max-w-md mx-auto animate-fade-in">
       <div class="relative mb-6">
-        <div class="w-32 h-32 bg-violet-500/20 rounded-full animate-pulse"></div>
+        <div class="w-32 h-32 bg-goldlight/20 rounded-full animate-pulse"></div>
         <slot name="icon">
-          <svg class="w-20 h-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-zinc-900"
+          <svg class="w-20 h-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-darkone"
                fill="none"
                stroke="currentColor"
                viewBox="0 0 24 24">
@@ -15,7 +15,7 @@
           </svg>
         </slot>
       </div>
-      <p class="text-white text-xl font-bold mb-4">
+      <p class="text-light text-xl font-bold mb-4">
         <slot></slot>
       </p>
     </div>

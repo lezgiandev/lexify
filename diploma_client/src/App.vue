@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-zinc-900">
+  <div class="bg-darkone">
     <router-view />
   </div>
 </template>

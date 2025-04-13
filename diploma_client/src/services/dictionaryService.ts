@@ -4,7 +4,7 @@ import type {
   DictionaryCategory,
   DictionaryResponse,
   PartOfSpeech, Translation
-} from '@/types/types.ts';
+} from '@/types';
 
 export const getWords = async (params: {
   category?: number;

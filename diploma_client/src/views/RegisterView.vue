@@ -15,7 +15,6 @@ const selectedLanguage = ref<number | null>(null);
 const errorMessage = ref('');
 const authStore = useAuthStore();
 const router = useRouter();
-const showPassword = ref(false);
 
 const userStore = useUserStore();
 
@@ -53,20 +52,20 @@ onMounted(
     <NavBar />
     <div class="flex-grow container mx-auto px-4 py-8">
       <div class="max-w-md mx-auto p-8">
-        <h1 class="text-3xl font-bold text-center mb-8 text-white">Регистрация</h1>
+        <h1 class="text-3xl font-bold text-center mb-8 text-light">Регистрация</h1>
         <form @submit.prevent="register" class="space-y-6">
           <div class="group relative">
             <input
               v-model="username"
               type="text"
               required
-              class="w-full px-6 py-4 bg-background-two rounded-xl text-white
-                       focus:outline-none focus:ring-2 focus:ring-violet-500
-                       border-2 border-transparent focus:border-violet-500
+              class="w-full px-6 py-4 bg-darktwo rounded-xl text-light
+                       focus:outline-none focus:ring-2 focus:ring-goldlight
+                       border-2 border-transparent focus:border-goldlight
                        transition-all duration-300 placeholder-transparent"
               placeholder=" "
             />
-            <label class="absolute left-4 top-1 text-sm text-white opacity-75
+            <label class="absolute left-4 top-1 text-sm text-light opacity-75
                            group-focus-within:-translate-y-7 group-focus-within:scale-90
                            transition-all duration-300 pointer-events-none">
               Имя пользователя
@@ -86,7 +85,7 @@ onMounted(
           />
 
           <div class="group relative">
-            <label class="block text-sm font-medium text-white">Выберите язык</label>
+            <label class="block text-sm font-medium text-light">Выберите язык</label>
             <CustomListbox
               v-model="selectedLanguage"
               :options="userStore.languages"
@@ -97,8 +96,8 @@ onMounted(
 
           <button
             type="submit"
-            class="w-full px-6 py-4 bg-violet-500 text-white font-semibold rounded-xl
-                    hover:bg-violet-700 transition-all duration-300 shadow-lg hover:shadow-xl
+            class="w-full px-6 py-4 bg-goldlight text-darkone font-semibold rounded-xl
+                    hover:bg-golddark transition-all duration-300 shadow-lg hover:shadow-xl
                     flex items-center justify-center gap-2"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

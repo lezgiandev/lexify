@@ -40,14 +40,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-    <div class="bg-zinc-800 rounded-2xl p-8 max-w-2xl w-full shadow-xl relative">
+  <div class="fixed inset-0 bg-darkone/50 flex items-center justify-center backdrop-blur-sm p-4 z-50">
+    <div class="bg-darktwo rounded-2xl p-8 max-w-2xl w-full shadow-xl relative">
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-white">Детали слова: {{ word }}</h2>
+        <h2 class="text-2xl font-bold text-light">Детали слова: {{ word }}</h2>
 
         <button
           @click="emit('close')"
-          class="absolute top-7 right-8 rounded-xl p-2 border-red-500 border text-red-500 hover:bg-red-500 hover:text-zinc-800 transition"
+          class="absolute top-7 right-8 rounded-xl p-2 border-redlight border text-redlight hover:bg-redlight hover:text-darktwo transition"
           aria-label="Закрыть"
         >
           <svg
@@ -69,12 +69,12 @@ onMounted(async () => {
 
       <div v-if="dictionaryStore.currentWordTranslations.length > 0" class="grid grid-cols-1 gap-4 mb-6">
         <div
-          class="p-4 bg-zinc-700 rounded-2xl shadow-lg flex flex-row md:flex-row justify-between items-center"
+          class="p-4 bg-darkthree rounded-2xl shadow-lg flex flex-row md:flex-row justify-between items-center"
           v-for="translation in dictionaryStore.currentWordTranslations"
           :key="translation.id"
         >
           <div class="flex flex-grow space-x-4 w-full md:w-auto font-main">
-            <div class="flex-1 text-xl rounded-lg text-white text-center whitespace-normal break-words font-bold">
+            <div class="flex-1 text-xl rounded-lg text-light text-center whitespace-normal break-words font-bold">
               {{ translation.text }}
             </div>
           </div>
@@ -82,7 +82,7 @@ onMounted(async () => {
           <div class="flex space-x-4 mt-0 ml-4 font-main">
             <button
               @click="playAudio(translation.audio)"
-              class="p-2 bg-violet-500/20 text-violet-500 rounded-xl hover:bg-violet-500 hover:text-zinc-700 transition duration-300"
+              class="p-2 bg-goldlight/20 text-goldlight rounded-xl hover:bg-goldlight hover:text-darkthree transition duration-300"
             >
               <svg
                 class="w-6 h-6"
@@ -103,7 +103,7 @@ onMounted(async () => {
             <button
               v-if="!isFavorite(translation.id)"
               @click="addToFavorites(translation.id)"
-              class="p-2 rounded-xl transition duration-300 bg-violet-500/20 text-violet-500 hover:bg-violet-500 hover:text-zinc-700"
+              class="p-2 rounded-xl transition duration-300 bg-goldlight/20 text-goldlight hover:bg-goldlight hover:text-darkthree"
             >
               <svg
                 class="w-6 h-6"
@@ -124,7 +124,7 @@ onMounted(async () => {
             <button
               v-else
               @click="removeFromFavorites(translation.id)"
-              class="p-2 rounded-xl transition duration-300 bg-button-cancel/20 text-button-cancel hover:bg-button-cancel hover:text-zinc-700"
+              class="p-2 rounded-xl transition duration-300 bg-redlight/20 text-redlight hover:bg-redlight hover:text-darkthree"
             >
               <svg
                 class="w-6 h-6"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref, computed, onMounted} from 'vue';
-import type { FavoriteWord } from '@/types/types.ts';
+import type { FavoriteWord } from '@/types';
 
 const props = defineProps<{
   words: FavoriteWord[];
@@ -99,14 +99,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-    <div class="bg-zinc-800 rounded-2xl p-8 max-w-2xl w-full shadow-xl relative">
+  <div class="fixed inset-0 bg-darkone/50 flex items-center justify-center backdrop-blur-sm p-4 z-50">
+    <div class="bg-darktwo rounded-2xl p-8 max-w-2xl w-full shadow-xl relative">
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold text-white">Тренировка</h2>
+        <h2 class="text-2xl font-bold text-light">Тренировка</h2>
 
         <button
           @click="emit('close')"
-          class="absolute top-7 right-8 rounded-xl p-2 border-red-500 border text-red-500 hover:bg-red-500 hover:text-zinc-800 transition"
+          class="absolute top-7 right-8 rounded-xl p-2 border-redlight border text-redlight hover:bg-redlight hover:text-darktwo transition"
           aria-label="Закрыть"
         >
           <svg
@@ -127,12 +127,12 @@ onMounted(() => {
       </div>
 
       <div class="mb-6">
-        <p class="text-xl text-white font-semibold mb-4">{{ questionText }}</p>
+        <p class="text-xl text-light font-semibold mb-4">{{ questionText }}</p>
 
         <div v-if="currentTestType === 3" class="mb-4">
           <button
             @click="playCurrentAudio"
-            class="py-3 px-6 bg-violet-500 text-slate-100 rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-violet-700 transition-all duration-300 flex items-center justify-center gap-2"
+            class="py-3 px-6 bg-goldlight text-darktwo rounded-xl font-bold shadow-lg hover:shadow-xl hover:bg-golddark transition-all duration-300 flex items-center justify-center gap-2"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -146,23 +146,23 @@ onMounted(() => {
           v-model="userAnswer"
           :disabled="showResult"
           type="text"
-          class="w-full p-3 rounded-xl bg-zinc-700 font-semibold text-white focus:ring-2 focus:ring-violet-500 focus:outline-none"
+          class="w-full p-3 rounded-xl bg-darkthree font-semibold text-light focus:ring-2 focus:ring-goldlight focus:outline-none"
           placeholder="Введите ваш ответ..."
         />
       </div>
 
-      <div v-if="showResult" class="mb-6 font-semibold bg-zinc-700 rounded-2xl p-4">
+      <div v-if="showResult" class="mb-6 font-semibold bg-darkthree rounded-2xl p-4">
         <p
           class="text-xl font-semibold"
           :class="userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase()
-            ? 'text-green-500'
-            : 'text-red-500'"
+            ? 'text-greenlight'
+            : 'text-redlight'"
         >
           {{ userAnswer.trim().toLowerCase() === correctAnswer.toLowerCase()
           ? 'Правильно! 🎉'
           : 'Неверно 😞' }}
         </p>
-        <p class="text-white mt-2 text-xl">
+        <p class="text-light mt-2 text-xl">
           Правильный ответ: <span class="font-bold">{{ correctAnswer }}</span>
         </p>
       </div>
@@ -171,7 +171,7 @@ onMounted(() => {
         <button
           v-if="!showResult"
           @click="checkAnswer"
-          class="px-6 py-3 bg-violet-500 text-slate-100 rounded-xl font-bold hover:bg-violet-700 transition"
+          class="px-6 py-3 bg-goldlight text-darktwo rounded-xl font-bold hover:bg-golddark transition"
         >
           Проверить
         </button>
@@ -179,7 +179,7 @@ onMounted(() => {
         <button
           v-else
           @click="nextWord"
-          class="px-6 py-3 bg-violet-500 text-slate-100 rounded-xl font-bold hover:bg-violet-700 transition"
+          class="px-6 py-3 bg-goldlight text-darktwo rounded-xl font-bold hover:bg-golddark transition"
         >
           Далее
         </button>

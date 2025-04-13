@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import {ref} from "vue";
-import type { CompletedBook, Sentence } from "@/types/types.ts";
+import type { CompletedBook, Sentence } from "@/types";
 import {
   addToCompletedBooks, deleteAllCompleted,
   getCompletedBooks,

@@ -6,7 +6,7 @@ import {
 } from "@/services/userService";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type {Language} from "@/types/types.ts";
+import type {Language} from "@/types";
 
 export const useUserStore = defineStore('user', () => {
   const language = ref<Language | null>(null);

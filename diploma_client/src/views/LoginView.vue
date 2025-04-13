@@ -18,14 +18,14 @@ const login = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-zinc-900">
+  <div class="min-h-screen flex flex-col bg-darkone">
     <NavBar />
     <div class="flex-grow container mx-auto px-4 py-12">
       <div class="max-w-md mx-auto p-8 relative overflow-hidden">
         <div class="absolute inset-0"></div>
 
         <div class="relative z-10">
-          <h1 class="text-4xl font-bold text-center mb-8 text-white font-main">
+          <h1 class="text-4xl font-bold text-center mb-8 text-light font-main">
             Добро пожаловать
             <span class="block text-2xl mt-2 font-main">Войдите в свой аккаунт</span>
           </h1>
@@ -36,13 +36,13 @@ const login = async () => {
                 v-model="username"
                 type="text"
                 required
-                class="w-full px-6 py-4 bg-background-two rounded-xl text-white
-                       focus:outline-none focus:ring-2 focus:ring-violet-500
-                       border-2 border-transparent focus:border-violet-500
+                class="w-full px-6 py-4 bg-darktwo rounded-xl text-light
+                       focus:outline-none focus:ring-2 focus:ring-goldlight
+                       border-2 border-transparent focus:border-goldlight
                        transition-all duration-300 placeholder-transparent"
                 placeholder=" "
               />
-              <label class="absolute left-4 top-1 text-sm text-white opacity-75
+              <label class="absolute left-4 top-1 text-sm text-light opacity-75
                            group-focus-within:-translate-y-7 group-focus-within:scale-90
                            transition-all duration-300 pointer-events-none">
                 Имя пользователя
@@ -57,8 +57,8 @@ const login = async () => {
 
             <button
               type="submit"
-              class="w-full px-6 py-4 bg-violet-500 text-white font-semibold rounded-xl
-                    hover:bg-violet-700 transition-all duration-300 shadow-lg hover:shadow-xl
+              class="w-full px-6 py-4 bg-goldlight text-darkone font-semibold rounded-xl
+                    hover:bg-golddark transition-all duration-300 shadow-lg hover:shadow-xl
                     flex items-center justify-center gap-2"
             >
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,7 +72,7 @@ const login = async () => {
           <div class="mt-8 text-center">
             <router-link
               to="/register"
-              class="text-violet-500 hover:underline font-main text-sm
+              class="text-goldlight hover:underline font-main text-sm
                     inline-flex items-center gap-1"
             >
               Нет аккаунта? Зарегистрируйтесь

@@ -1,4 +1,4 @@
-import type { CompletedBook } from "@/types/types.ts";
+import type { CompletedBook } from "@/types";
 import axios from "axios";
 import { API_URL } from "@/services/baseURL.ts";
 

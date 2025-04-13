@@ -30,14 +30,14 @@ const updateValue = (event: Event) => {
       :value="modelValue"
       :type="showPassword ? 'text' : 'password'"
       :required="required"
-      class="w-full px-6 py-4 bg-zinc-800 rounded-xl text-white
-        focus:outline-none focus:ring-2 focus:ring-violet-500
-        border-2 border-transparent focus:border-violet-500
+      class="w-full px-6 py-4 bg-darktwo rounded-xl text-light
+        focus:outline-none focus:ring-2 focus:ring-goldlight
+        border-2 border-transparent focus:border-goldlight
         transition-all duration-300 placeholder-transparent pr-12"
       placeholder=" "
       @input="updateValue"
     />
-    <label class="absolute left-4 top-1 text-sm text-white opacity-75
+    <label class="absolute left-4 top-1 text-sm text-light opacity-75
          group-focus-within:-translate-y-7 group-focus-within:scale-90
          transition-all duration-300 pointer-events-none">
       {{ placeholder }}
@@ -46,7 +46,7 @@ const updateValue = (event: Event) => {
     <button
       type="button"
       @click="showPassword = !showPassword"
-      class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white transition-colors"
+      class="absolute right-4 top-1/2 -translate-y-1/2 text-light/50 hover:text-light transition-colors"
       aria-label="Показать пароль"
     >
       <svg

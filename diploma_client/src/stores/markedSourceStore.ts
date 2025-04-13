@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import type { MarkedSource } from "@/types/types.ts";
+import type { MarkedSource } from "@/types";
 import {
   addToMarkedSources, deleteAllMarks,
   getMarkedSources,

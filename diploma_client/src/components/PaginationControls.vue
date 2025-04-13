@@ -14,14 +14,14 @@ const emit = defineEmits(['prev', 'next'])
       :disabled="currentPage === 1"
       class="px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
       :class="currentPage === 1
-        ? 'bg-zinc-700 text-font-main opacity-50 cursor-not-allowed'
-        : 'bg-violet-500 text-white hover:bg-violet-700'"
+        ? 'bg-darkthree text-font-main opacity-50 cursor-not-allowed'
+        : 'bg-goldlight text-darkthree hover:bg-golddark'"
     >
       ← Назад
     </button>
 
-    <div class="flex items-center bg-zinc-800 rounded-xl px-6 shadow-lg">
-      <span class="text-font-main">
+    <div class="flex items-center bg-darktwo rounded-xl px-6 shadow-lg">
+      <span class="text-light">
         Страница {{ currentPage }} <span class="opacity-50">из {{ totalPages }}</span>
       </span>
     </div>
@@ -31,8 +31,8 @@ const emit = defineEmits(['prev', 'next'])
       :disabled="currentPage >= totalPages"
       class="px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
       :class="currentPage >= totalPages
-        ? 'bg-zinc-700 text-font-main opacity-50 cursor-not-allowed'
-        : 'bg-violet-500 text-white hover:bg-violet-700'"
+        ? 'bg-darkthree text-font-main opacity-50 cursor-not-allowed'
+        : 'bg-goldlight text-darkthree hover:bg-golddark'"
     >
       Вперед →
     </button>

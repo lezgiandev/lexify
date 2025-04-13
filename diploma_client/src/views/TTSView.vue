@@ -39,16 +39,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-zinc-900">
+  <div class="min-h-screen flex flex-col bg-darkone">
     <NavBar />
     <main class="flex-grow container mx-auto px-4 py-8">
       <div class="mb-8 relative font-semibold">
-        <h1 class="text-white text-3xl font-bold font-main">
+        <h1 class="text-light text-3xl font-bold font-main">
           Озвучка текста: {{ userStore.language?.name }}
-          <span class="absolute bottom-0 left-0 w-32 h-1 bg-violet-500 mt-2"></span>
+          <span class="absolute bottom-0 left-0 w-32 h-1 bg-goldlight mt-2"></span>
         </h1>
-        <p class="text-violet-500 text-lg mt-2 font-main">
-          Изменить язык можно в <router-link to="/settings" class="text-violet-500 hover:underline">настройках</router-link>
+        <p class="text-goldlight text-lg mt-2 font-main">
+          Изменить язык можно в <router-link to="/settings" class="text-goldlight hover:underline">настройках</router-link>
         </p>
       </div>
 
@@ -58,13 +58,13 @@ onMounted(async () => {
             v-model="inputText"
             placeholder="Введите текст для озвучивания..."
             :disabled="isLoading"
-            class="w-full p-6 font-semibold text-lg bg-zinc-800 text-white rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-violet-500 font-main h-40 transition-all duration-300 hover:shadow-xl resize-none pr-16"
+            class="w-full p-6 font-semibold text-lg bg-darktwo text-light rounded-2xl shadow-lg focus:outline-none focus:ring-2 focus:ring-goldlight font-main h-40 transition-all duration-300 hover:shadow-xl resize-none pr-16"
           ></textarea>
           <div class="absolute bottom-6 right-6 flex gap-4">
             <button
               @click="generate"
               :disabled="!inputText || isLoading"
-              class="px-6 py-3 bg-violet-500 text-slate-200 rounded-xl font-bold hover:bg-violet-700 transition-all duration-300 flex items-center gap-2"
+              class="px-6 py-3 bg-goldlight text-darktwo rounded-xl font-bold hover:bg-golddark transition-all duration-300 flex items-center gap-2"
               :class="{ 'opacity-50 cursor-not-allowed': !inputText || isLoading }"
             >
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,14 +75,14 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div v-if="isLoading" class="flex items-center justify-center gap-4 text-violet-500 font-semibold">
-          <div class="animate-spin w-8 h-8 border-4 border-violet-500 border-t-transparent rounded-full"></div>
+        <div v-if="isLoading" class="flex items-center justify-center gap-4 text-goldlight font-semibold">
+          <div class="animate-spin w-8 h-8 border-4 border-goldlight border-t-transparent rounded-full"></div>
           <span class="font-main">Идет генерация аудио...</span>
         </div>
       </div>
 
-      <div v-if="error" class="mb-8 p-6 bg-red-100/50 backdrop-blur-sm rounded-2xl border-2 border-red-200 animate-fade-in">
-        <div class="flex items-center gap-4 text-red-500">
+      <div v-if="error" class="mb-8 p-6 bg-redlight/50 backdrop-blur-sm rounded-2xl border-2 border-redlight animate-fade-in">
+        <div class="flex items-center gap-4 text-redlight">
           <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
           </svg>
@@ -90,15 +90,15 @@ onMounted(async () => {
         </div>
       </div>
 
-      <div v-if="history.length" class="bg-zinc-800 rounded-2xl p-6 shadow-xl">
+      <div v-if="history.length" class="bg-darktwo rounded-2xl p-6 shadow-xl">
         <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
           <h2 class="text-white text-2xl font-bold font-main">
             История генераций
-            <span class="text-violet-500/50">({{ history.length }})</span>
+            <span class="text-goldlight/50">({{ history.length }})</span>
           </h2>
           <button
             @click="clearHistory"
-            class="px-6 py-3 bg-button-cancel/20 text-button-cancel rounded-xl font-bold hover:bg-button-cancel hover:text-zinc-800 transition-all duration-300 flex items-center gap-2"
+            class="px-6 py-3 bg-redlight/20 text-redlight rounded-xl font-bold hover:bg-redlight hover:text-darktwo transition-all duration-300 flex items-center gap-2"
           >
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
@@ -120,7 +120,7 @@ onMounted(async () => {
 
       <EmptyState v-else>
         <template #icon>
-          <svg class="w-20 h-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-zinc-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-20 h-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-darkone" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75"/>
           </svg>
         </template>

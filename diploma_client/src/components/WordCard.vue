@@ -15,9 +15,9 @@ const openDetails = () => {
 </script>
 
 <template>
-  <div class="p-4 bg-zinc-800 rounded-2xl shadow-lg flex flex-row md:flex-row justify-between items-center">
+  <div class="p-4 bg-darktwo rounded-2xl shadow-lg flex flex-row md:flex-row justify-between items-center">
     <div class="flex flex-grow space-x-4 w-full md:w-auto font-main">
-      <div class="flex-1 text-xl rounded-lg text-zinc-100 text-center whitespace-normal break-words font-bold">
+      <div class="flex-1 text-xl rounded-lg text-light text-center whitespace-normal break-words font-bold">
         {{ word }}
       </div>
     </div>
@@ -25,7 +25,7 @@ const openDetails = () => {
     <div class="flex space-x-4 mt-0 ml-4 font-main">
       <button
         @click="openDetails"
-        class="p-2 bg-violet-500/20 text-violet-500 rounded-xl hover:bg-violet-500 hover:text-zinc-800 transition duration-300"
+        class="p-2 bg-goldlight/20 text-goldlight rounded-xl hover:bg-goldlight hover:text-darktwo transition duration-300"
       >
         <svg
           class="w-6 h-6"

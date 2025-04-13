@@ -1,4 +1,4 @@
-import type { MarkedSource } from "@/types/types.ts";
+import type { MarkedSource } from "@/types";
 import axios from "axios";
 import { API_URL } from "@/services/baseURL.ts";
 

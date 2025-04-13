@@ -58,16 +58,16 @@ const languages = [
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-zinc-800">
+  <div class="min-h-screen flex flex-col bg-darktwo">
     <NavBar />
     <main class="flex-grow">
-      <div class="relative py-16 bg-zinc-900 overflow-hidden">
-        <div class="absolute inset-0 pattern-dots-lg text-violet-500/10 opacity-60"></div>
+      <div class="relative py-12 bg-darkone overflow-hidden">
+        <div class="absolute inset-0 pattern-dots-lg text-goldlight/20 opacity-60"></div>
         <div class="container mx-auto px-4 text-center relative">
-          <h1 class="mb-8 text-7xl md:text-8xl font-great text-violet-500 transform hover:scale-105 transition duration-500">
+          <h1 class="mb-8 text-7xl md:text-9xl font-great text-goldlight transform hover:scale-105 transition duration-500">
             Lexify
           </h1>
-          <p class="mb-4 text-2xl font-main text-white max-w-2xl mx-auto leading-relaxed">
+          <p class="mb-4 text-2xl font-main text-light max-w-2xl mx-auto leading-relaxed">
             Откройте для себя богатство языков коренных народов России через цифровое погружение
           </p>
           <div class="animate-[bounce_2s_infinite] mt-4">
@@ -89,8 +89,8 @@ const languages = [
                   x2="32"
                   y2="52"
                   gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#A78BFA" offset=""/>
-                  <stop offset="0.7" stop-color="#8b5cf6"/>
+                  <stop stop-color="#fdba74" offset=""/>
+                  <stop offset="0.7" stop-color="#fdba74"/>
                 </linearGradient>
               </defs>
             </svg>
@@ -139,8 +139,8 @@ const languages = [
         </div>
       </div>
 
-      <div class="relative py-12 bg-zinc-900 overflow-hidden">
-        <div class="absolute inset-0 pattern-dots-lg text-violet-500/10 opacity-60"></div>
+      <div class="relative py-12 bg-darkone overflow-hidden">
+        <div class="absolute inset-0 pattern-dots-lg text-goldlight/10 opacity-60"></div>
         <div class="container mx-auto px-4">
           <SectionTitle text="Поддерживаемые языки" />
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -1,4 +1,4 @@
-import type { FavoriteWord } from "@/types/types.ts";
+import type { FavoriteWord } from "@/types";
 import axios from "axios";
 import { API_URL } from "@/services/baseURL.ts";
 

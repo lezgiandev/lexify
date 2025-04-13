@@ -4,7 +4,7 @@ import {
   getBooks,
   getBookSentences, getCategories,
 } from '@/services/libraryService';
-import type {Book, BookCategory, Sentence} from '@/types/types.ts';
+import type {Book, BookCategory, Sentence} from '@/types';
 
 
 export const useLibraryStore = defineStore('library', () => {

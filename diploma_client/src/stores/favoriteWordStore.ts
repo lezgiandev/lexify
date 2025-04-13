@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {ref} from "vue";
-import type {FavoriteWord} from "@/types/types.ts";
+import type {FavoriteWord} from "@/types";
 import {
   addToFavorites, deleteAllFavorites,
   getFavoriteWords,

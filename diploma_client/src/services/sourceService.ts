@@ -1,7 +1,7 @@
 import type {
   SourceCategory,
   SourceResponse
-} from "@/types/types.ts";
+} from "@/types";
 import axios from "axios";
 import { API_URL } from "@/services/baseURL.ts";
 
