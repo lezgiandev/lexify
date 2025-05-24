@@ -1,3 +1,5 @@
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, serializers, status, filters, response
 from rest_framework.decorators import action
@@ -9,10 +11,17 @@ from apps.user.models import User
 
 
 class BookCategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint для работы с категориями книг
+    """
     permission_classes = [IsAuthenticated]
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+    @swagger_auto_schema(
+        operation_description="Получить список всех категорий книг",
+        responses={200: CategorySerializer(many=True)}
+    )
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
@@ -20,12 +29,31 @@ class BookCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class LibraryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint для работы с библиотекой книг
+    """
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['category']
     search_fields = ['title', 'author']
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'category',
+                openapi.IN_QUERY,
+                description="Фильтр по ID категории",
+                type=openapi.TYPE_INTEGER
+            ),
+            openapi.Parameter(
+                'search',
+                openapi.IN_QUERY,
+                description="Поиск по названию или автору",
+                type=openapi.TYPE_STRING
+            )
+        ]
+    )
     def get_queryset(self):
         if isinstance(self.request.user, User) and hasattr(self.request.user, 'language'):
             return Book.objects.filter(
@@ -33,6 +61,14 @@ class LibraryViewSet(viewsets.ReadOnlyModelViewSet):
             ).order_by("title")
         return Book.objects.none()
 
+    @swagger_auto_schema(
+        methods=['get'],
+        operation_description="Получить список предложений для книги",
+        responses={
+            200: SentenceSerializer(many=True),
+            404: "Книга не найдена"
+        }
+    )
     @action(detail=True, methods=['get'], url_path='sentences')
     def list_sentences(self, request, pk=None):
         book = self.get_object()
@@ -42,17 +78,30 @@ class LibraryViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class CompletedBookViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint для работы с прочитанными книгами
+    """
     serializer_class = CompletedBookSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = None
 
-    def get_queryset(self):
-        if isinstance(self.request.user, User):
-            return CompletedBook.objects.filter(
-                user=self.request.user,
-                book__language=self.request.user.language
-            ).order_by('book__title')
-        return CompletedBook.objects.none()
+    @swagger_auto_schema(
+        operation_description="Получить список прочитанных книг",
+        responses={200: CompletedBookSerializer(many=True)}
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Добавить книгу в прочитанные",
+        responses={
+            201: CompletedBookSerializer,
+            400: "Книга уже в прочитанных",
+            401: "Не авторизован"
+        }
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         if isinstance(self.request.user, User):
@@ -63,6 +112,24 @@ class CompletedBookViewSet(viewsets.ModelViewSet):
         else:
             raise serializers.ValidationError("Пользователь не авторизован!")
 
+    @swagger_auto_schema(
+        methods=['delete'],
+        operation_description="Удалить книгу из прочитанных по ID",
+        manual_parameters=[
+            openapi.Parameter(
+                'book_id',
+                openapi.IN_QUERY,
+                description="ID книги для удаления",
+                type=openapi.TYPE_INTEGER,
+                required=True
+            )
+        ],
+        responses={
+            204: "Успешное удаление",
+            400: "Не указан book_id",
+            404: "Книга не найдена в прочитанных"
+        }
+    )
     @action(detail=False, methods=['delete'], url_path='delete')
     def remove_by_book(self, request):
         book_id = request.query_params.get('book_id')
@@ -79,6 +146,14 @@ class CompletedBookViewSet(viewsets.ModelViewSet):
         except CompletedBook.DoesNotExist:
             return Response({"detail": "Книга не найдена в прочитанном."}, status=status.HTTP_404_NOT_FOUND)
 
+    @swagger_auto_schema(
+        methods=['delete'],
+        operation_description="Удалить все прочитанные книги",
+        responses={
+            204: "Все книги удалены",
+            404: "Книги не найдены"
+        }
+    )
     @action(detail=False, methods=['delete'], url_path='delete-all')
     def delete_all_completed(self, request):
         try:
@@ -89,3 +164,11 @@ class CompletedBookViewSet(viewsets.ModelViewSet):
             )
         except CompletedBook.DoesNotExist:
             return Response({"detail": "Книги не найдены в прочитанном."}, status=status.HTTP_404_NOT_FOUND)
+
+    def get_queryset(self):
+        if isinstance(self.request.user, User):
+            return CompletedBook.objects.filter(
+                user=self.request.user,
+                book__language=self.request.user.language
+            ).order_by('book__title')
+        return CompletedBook.objects.none()

@@ -1,3 +1,5 @@
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, filters, serializers, status, response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
@@ -11,10 +13,17 @@ from apps.user.models import User
 
 
 class DictionaryCategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint для работы с категориями словаря
+    """
     permission_classes = [IsAuthenticated]
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
+    @swagger_auto_schema(
+        operation_description="Получить список всех категорий словаря",
+        responses={200: CategorySerializer(many=True)}
+    )
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
@@ -22,10 +31,17 @@ class DictionaryCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class PartOfSpeechViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint для работы с частями речи
+    """
     permission_classes = [IsAuthenticated]
     queryset = PartOfSpeech.objects.all()
     serializer_class = PartOfSpeechSerializer
 
+    @swagger_auto_schema(
+        operation_description="Получить список всех частей речи",
+        responses={200: PartOfSpeechSerializer(many=True)}
+    )
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
@@ -33,17 +49,51 @@ class PartOfSpeechViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class DictionaryViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint для работы со словарем
+    """
     serializer_class = WordSerializer
     permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['category', 'part_of_speech']
     search_fields = ['text']
 
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'category',
+                openapi.IN_QUERY,
+                description="Фильтр по ID категории",
+                type=openapi.TYPE_INTEGER
+            ),
+            openapi.Parameter(
+                'part_of_speech',
+                openapi.IN_QUERY,
+                description="Фильтр по ID части речи",
+                type=openapi.TYPE_INTEGER
+            ),
+            openapi.Parameter(
+                'search',
+                openapi.IN_QUERY,
+                description="Поиск по тексту слова",
+                type=openapi.TYPE_STRING
+            )
+        ]
+    )
     def get_queryset(self):
         if isinstance(self.request.user, User):
             return Word.objects.order_by("text")
         return Word.objects.none()
 
+    @swagger_auto_schema(
+        methods=['get'],
+        operation_description="Получить переводы для конкретного слова",
+        responses={
+            200: TranslationSerializer(many=True),
+            404: "Слово не найдено",
+            500: "Внутренняя ошибка сервера"
+        }
+    )
     @action(detail=True, methods=['get'], url_path='translations')
     def list_translations(self, request, pk=None):
         try:
@@ -62,18 +112,32 @@ class DictionaryViewSet(viewsets.ReadOnlyModelViewSet):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+
 class FavoriteWordViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint для работы с избранными словами
+    """
     serializer_class = FavoriteWordSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = None
 
-    def get_queryset(self):
-        if isinstance(self.request.user, User):
-            return FavoriteWord.objects.filter(
-                user=self.request.user,
-                translation__language=self.request.user.language
-            ).order_by('translation__id')
-        return FavoriteWord.objects.none()
+    @swagger_auto_schema(
+        operation_description="Получить список избранных слов пользователя",
+        responses={200: FavoriteWordSerializer(many=True)}
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_description="Добавить слово в избранное",
+        responses={
+            201: FavoriteWordSerializer,
+            400: "Слово уже в избранном",
+            401: "Не авторизован"
+        }
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         if isinstance(self.request.user, User):
@@ -84,6 +148,24 @@ class FavoriteWordViewSet(viewsets.ModelViewSet):
         else:
             raise serializers.ValidationError("Пользователь не авторизован!")
 
+    @swagger_auto_schema(
+        methods=['delete'],
+        operation_description="Удалить слово из избранного по ID перевода",
+        manual_parameters=[
+            openapi.Parameter(
+                'translation_id',
+                openapi.IN_QUERY,
+                description="ID перевода для удаления",
+                type=openapi.TYPE_INTEGER,
+                required=True
+            )
+        ],
+        responses={
+            204: "Успешное удаление",
+            400: "Не указан translation_id",
+            404: "Слово не найдено в избранном"
+        }
+    )
     @action(detail=False, methods=['delete'], url_path='delete')
     def remove_by_translation(self, request):
         translation_id = request.query_params.get('translation_id')
@@ -100,6 +182,14 @@ class FavoriteWordViewSet(viewsets.ModelViewSet):
         except FavoriteWord.DoesNotExist:
             return Response({"detail": "Слово не найдено в избранном."}, status=status.HTTP_404_NOT_FOUND)
 
+    @swagger_auto_schema(
+        methods=['delete'],
+        operation_description="Удалить все избранные слова пользователя",
+        responses={
+            204: "Все слова удалены",
+            404: "Слова не найдены"
+        }
+    )
     @action(detail=False, methods=['delete'], url_path='delete-all')
     def delete_all_favorites(self, request):
         try:
@@ -110,3 +200,11 @@ class FavoriteWordViewSet(viewsets.ModelViewSet):
             )
         except FavoriteWord.DoesNotExist:
             return Response({"detail": "Слова не найдены в избранном."}, status=status.HTTP_404_NOT_FOUND)
+
+    def get_queryset(self):
+        if isinstance(self.request.user, User):
+            return FavoriteWord.objects.filter(
+                user=self.request.user,
+                translation__language=self.request.user.language
+            ).order_by('translation__id')
+        return FavoriteWord.objects.none()

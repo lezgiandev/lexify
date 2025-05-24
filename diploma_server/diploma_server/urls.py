@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import permissions
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django.conf import settings
@@ -11,6 +12,8 @@ from apps.library.views import LibraryViewSet, CompletedBookViewSet, BookCategor
 from apps.sourcelink.views import SourceViewSet, MarkedSourceViewSet, SourceCategoryViewSet
 from apps.texttospeech.views import GenerateAudioView
 from apps.user.views import RegisterView, LanguageUpdateView, LanguageRetrieveView, ChangePasswordView
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
 router = DefaultRouter()
 router.register(r'dictionary-categories', DictionaryCategoryViewSet, basename='dictionary-categories')
@@ -25,7 +28,20 @@ router.register(r'marked-sources', MarkedSourceViewSet, basename='marked-sources
 router.register(r'source-categories', SourceCategoryViewSet, basename='source-categories')
 router.register(r'alphabet', LetterListView, basename="alphabet")
 
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Lexify API",
+        default_version='v1',
+        description="Документация API",
+    ),
+    public=True,
+    permission_classes=[permissions.AllowAny],
+    urlconf='diploma_server.urls',
+)
+
 urlpatterns = [
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
     path('api/register/', RegisterView.as_view(), name='register'),
     path('api/languages/', LanguageListView.as_view(), name='languages'),
